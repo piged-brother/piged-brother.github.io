@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>吴恩达深度学习课程第一课 | 猪头弟弟</title><meta name="author" content="猪头弟弟"><meta name="copyright" content="猪头弟弟"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC]   二元分类意思就是是猫或者不是猫 这里只是打个比方。 logistic回归常见的logistic回归就是sigmoid函数套住y&#x3D;wx+b    公式如下 $$y&#x3D;\vartheta (\mathbf{W}^\mathrm{T}x+b)$ 使得其概率鉴于0-1之间使得sigmoid函数变成这样 $\vartheta (\hat{z} ) &#x3D; \frac{1} { 1+e^{\hat{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="吴恩达深度学习课程第一课">
+<meta property="og:url" content="http://piged-brother.github.io/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html">
+<meta property="og:site_name" content="猪头弟弟">
+<meta property="og:description" content="[TOC]   二元分类意思就是是猫或者不是猫 这里只是打个比方。 logistic回归常见的logistic回归就是sigmoid函数套住y&#x3D;wx+b    公式如下 $$y&#x3D;\vartheta (\mathbf{W}^\mathrm{T}x+b)$ 使得其概率鉴于0-1之间使得sigmoid函数变成这样 $\vartheta (\hat{z} ) &#x3D; \frac{1} { 1+e^{\hat{">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg">
+<meta property="article:published_time" content="2023-10-11T12:39:33.000Z">
+<meta property="article:modified_time" content="2023-10-12T12:27:12.080Z">
+<meta property="article:author" content="猪头弟弟">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://piged-brother.github.io/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '吴恩达深度学习课程第一课',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-12 20:27:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-book"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="猪头弟弟"><span class="site-name">猪头弟弟</span></a></span><div id="weather"><div id="tp-weather-widget"></div>  </div><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-book"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">吴恩达深度学习课程第一课</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-11T12:39:33.000Z" title="发表于 2023-10-11 20:39:33">2023-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-12T12:27:12.080Z" title="更新于 2023-10-12 20:27:12">2023-10-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="吴恩达深度学习课程第一课"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\Desktop\深度学习笔记\监督学习流程.png" alt="监督学习流程"> </p>
+<h1 id="二元分类"><a href="#二元分类" class="headerlink" title="二元分类"></a><strong>二元分类</strong></h1><p>意思就是是猫或者不是猫 这里只是打个比方。</p>
+<h3 id="logistic回归"><a href="#logistic回归" class="headerlink" title="logistic回归"></a>logistic回归</h3><p>常见的logistic回归就是sigmoid函数套住y=wx+b    公式如下</p>
+<p>$$y=\vartheta (\mathbf{W}^\mathrm{T}x+b)$</p>
+<p>使得其概率鉴于0-1之间使得sigmoid函数变成这样</p>
+<p>$\vartheta (\hat{z} ) = \frac{1} { 1+e^{\hat{z}} }$</p>
+<h3 id="损失函数：是衡量单一训练样例的效果"><a href="#损失函数：是衡量单一训练样例的效果" class="headerlink" title="损失函数：是衡量单一训练样例的效果"></a>损失函数：是衡量单一训练样例的效果</h3><p>损失函数定义位$\delta (\hat{y} ,y)=\frac{1}{z} (\hat{y}-y)^2$  就是定义$\hat{y}$和y之间的距离有多近 这里的$\hat{y}$ 就代表了sigmoid(z)函数</p>
+<p>但是这个损失函数更好因为e为底 $\delta =-(y(log \hat{y}+(1-y)log(1- \hat{y}))$</p>
+<p>损失函数有负号的原因是在逻辑回归中我们需要最小化损失函数，但是由于有个负号并且log函数的单调递增的，  导致其最小化的损失函数就是最大化的logP（y|X）</p>
+<p>损失函数又叫做误差函数，用来衡量算法的运行情况，Loss function: L ( $\hat{y}$ , y ) </p>
+<p>我们通过这个称为 L LL 的损失函数，来衡量预测输出值和实际值有多接近。一般我们用预测值和实际值的平方差或者它们平方差的一半，但是通常在逻辑回归中我们不这么做，因为当我们在学习逻辑回归参数的时候，会发现我们的优化目标不是凸优化，只能找到多个局部最优值，梯度下降法很可能找不到全局最优值，虽然平方差是一个不错的损失函数，但是我们在逻辑回归模型中会定义另外一个损失函数。</p>
+<p>我们在逻辑回归中用到的损失函数是：<br>$ J=-(y(log \hat{y}+(1-y)log(1- \hat{y}))$</p>
+<h3 id="成本函数-衡量w和b的效果"><a href="#成本函数-衡量w和b的效果" class="headerlink" title="成本函数:衡量w和b的效果"></a>成本函数:衡量w和b的效果</h3><p>成本函数是  $J(\delta,b)=\frac{1}{m} \sum<em>{1}^{m} \delta (\hat{y} ,y) = -\frac{1}{m} \sum</em>{1}^{m} [(-y^{i}(log\hat{y}^{i}+(1-y^{i})log(1- \hat{y}^{i} ))]$ y代表1或0 举个是否鉴别猫的例子</p>
+<p>1/m是可以加或者不加的 但是加的原因是对可以对单个成本进行估计，也就是适当的缩放损失函数。</p>
+<h3 id="梯度下降法：找到最小的成本函数"><a href="#梯度下降法：找到最小的成本函数" class="headerlink" title="梯度下降法：找到最小的成本函数"></a>梯度下降法：找到最小的成本函数</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\Desktop\深度学习笔记\1694484928365.jpg" alt="1694484928365"></p>
+<p>找到最低点 令$w=w-\alpha \frac{\mathrm{d} j(w)}{\mathrm{d} w} $</p>
+<p>找到极小值  意思就是牛顿迭代， 举个例子w在极小值（最低点）右边  此时斜率&gt;0 但是$\alpha \frac{\mathrm{d} j(w)}{\mathrm{d} w}$&gt;0</p>
+<p>这时候w就会变小  左边就同理</p>
+<p>同理 找成本函数的参数b的时候<strong>$b=b-\alpha \frac{\mathrm{d} j(b)}{\mathrm{d} b} $</strong></p>
+<h4 id="计算梯度"><a href="#计算梯度" class="headerlink" title="计算梯度"></a>计算梯度</h4><p>  <img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912104555026.png" alt="image-20230912104555026">a</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912150316908.png" alt="image-20230912150316908"></p>
+<h2 id="向量化：加速计算，摆脱显示for循环语句"><a href="#向量化：加速计算，摆脱显示for循环语句" class="headerlink" title="向量化：加速计算，摆脱显示for循环语句"></a>向量化：加速计算，摆脱显示for循环语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import time//此案例为比较向量化运算和非向量化运算之间的速度</span><br><span class="line">a = np.random.rand(1000000)</span><br><span class="line">b = np.random.rand(1000000)</span><br><span class="line"></span><br><span class="line">tic = time.time()</span><br><span class="line">c = np.dot(a,b)</span><br><span class="line">toc = time .time()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(c)</span><br><span class="line">print(&quot;vector :&quot; + str(1000*(toc-tic)) + &quot;ms&quot;)</span><br><span class="line"></span><br><span class="line">c=0;</span><br><span class="line">tic = time.time()</span><br><span class="line"></span><br><span class="line">for i in range(1000000):</span><br><span class="line">    c+= a[i]*b[i]</span><br><span class="line">toc = time.time()</span><br><span class="line">print(c)</span><br><span class="line">print(&quot;for loop&quot;+ str(1000*(toc-tic)) + &quot;ms&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="向量化的logistic回归"><a href="#向量化的logistic回归" class="headerlink" title="向量化的logistic回归"></a>向量化的logistic回归</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912170514411.png" alt="image-20230912170514411"></p>
+<p>将z写成向量乘法的形式用np内置库进行运算从而摆脱for循环</p>
+<p>python<strong>的广播机制</strong>：意思就是将一个向量+上一个常数后 该常熟就自动被扩展成与该向量行和列匹配的向量</p>
+<p>如</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912171046265.png" alt="image-20230912171046265"></p>
+<p>等于</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912171059528.png" alt="image-20230912171059528"></p>
+<p>dz 和dw的计算脱离for循环变成</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912172407404.png" alt="image-20230912172407404"></p>
+<p>非向量化的 logic回归版本：<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912172526590.png" alt="image-20230912172526590"></p>
+<p>向量化后简化的版本：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230912173545392.png" alt="image-20230912173545392"></p>
+<p>ps: python 广播机制举例：3x4矩阵+1x4矩阵   1x4矩阵会自动扩充成 3x4矩阵   </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230913152604028.png" alt="image-20230913152604028"></p>
+<p>注：在使用数据的时候尽量不要使用矩阵秩为1的矩阵来操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#实现sigmoid函数</span><br><span class="line"></span><br><span class="line">def sigmoid(x):</span><br><span class="line">   s= 1 /(np.exp(-x) +1)#np.exp（x）适用于任何np.array x并将指数函数应用于每个坐标</span><br><span class="line">    return s</span><br><span class="line">def sigmoid_derivative(x):</span><br><span class="line">    s= sigmoid(x)</span><br><span class="line">    ds = s*(1-s)</span><br><span class="line">    return ds</span><br><span class="line"></span><br><span class="line">#实现输入采用维度为(length, height, 3)的输入，并返回维度为(length*height*3, 1)的向量。</span><br><span class="line">def image2vector(image):</span><br><span class="line">    v = image.reshape((image.shape[0]*image.shape[1]*image.shape[2]),1)</span><br><span class="line">    return v</span><br><span class="line"></span><br><span class="line">image = np.array([[[ 0.67826139,  0.29380381],</span><br><span class="line">        [ 0.90714982,  0.52835647],</span><br><span class="line">        [ 0.4215251 ,  0.45017551]],</span><br><span class="line">         [[ 0.92814219,  0.96677647],</span><br><span class="line">    [ 0.85304703,  0.52351845],</span><br><span class="line">    [ 0.19981397,  0.27417313]],</span><br><span class="line"></span><br><span class="line">   [[ 0.60659855,  0.00533165],</span><br><span class="line">    [ 0.10820313,  0.49978937],</span><br><span class="line">    [ 0.34144279,  0.94630077]]])</span><br><span class="line">    print (&quot;image2vector(image) = &quot; + str(image2vector(image)))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">x1 = [9, 2, 5, 0, 0, 7, 5, 0, 0, 0, 9, 2, 5, 0, 0]</span><br><span class="line">x2 = [9, 2, 2, 9, 0, 9, 2, 5, 0, 0, 9, 2, 5, 0, 0]</span><br><span class="line"></span><br><span class="line">### VECTORIZED DOT PRODUCT OF VECTORS ###</span><br><span class="line">tic = time.process_time()</span><br><span class="line">dot = np.dot(x1,x2)</span><br><span class="line">toc = time.process_time()</span><br><span class="line">print (&quot;dot = &quot; + str(dot) + &quot;\n ----- Computation time = &quot; + str(1000*(toc - tic)) + &quot;ms&quot;)</span><br><span class="line"></span><br><span class="line">### VECTORIZED OUTER PRODUCT ###</span><br><span class="line">tic = time.process_time()</span><br><span class="line">outer = np.outer(x1,x2)</span><br><span class="line">toc = time.process_time()</span><br><span class="line">print (&quot;outer = &quot; + str(outer) + &quot;\n ----- Computation time = &quot; + str(1000*(toc - tic)) + &quot;ms&quot;)</span><br><span class="line"></span><br><span class="line">### VECTORIZED ELEMENTWISE MULTIPLICATION ###</span><br><span class="line">tic = time.process_time()</span><br><span class="line">mul = np.multiply(x1,x2)</span><br><span class="line">toc = time.process_time()</span><br><span class="line">print (&quot;elementwise multiplication = &quot; + str(mul) + &quot;\n ----- Computation time = &quot; + str(1000*(toc - tic)) + &quot;ms&quot;)</span><br><span class="line"></span><br><span class="line">### VECTORIZED GENERAL DOT PRODUCT ###</span><br><span class="line">tic = time.process_time()</span><br><span class="line">dot = np.dot(W,x1)</span><br><span class="line">toc = time.process_time()</span><br><span class="line">print (&quot;gdot = &quot; + str(dot) + &quot;\n ----- Computation time = &quot; + str(1000*(toc - tic)) + &quot;ms&quot;)</span><br><span class="line">dot = 278</span><br><span class="line"> ----- Computation time = 0.0ms</span><br><span class="line">outer = [[81 18 18 81  0 81 18 45  0  0 81 18 45  0  0]</span><br><span class="line"> [18  4  4 18  0 18  4 10  0  0 18  4 10  0  0]</span><br><span class="line"> [45 10 10 45  0 45 10 25  0  0 45 10 25  0  0]</span><br><span class="line"> [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]</span><br><span class="line"> [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]</span><br><span class="line"> [63 14 14 63  0 63 14 35  0  0 63 14 35  0  0]</span><br><span class="line"> [45 10 10 45  0 45 10 25  0  0 45 10 25  0  0]</span><br><span class="line"> [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]</span><br><span class="line"> [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]</span><br><span class="line"> [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]</span><br><span class="line"> [81 18 18 81  0 81 18 45  0  0 81 18 45  0  0]</span><br><span class="line"> [18  4  4 18  0 18  4 10  0  0 18  4 10  0  0]</span><br><span class="line"> [45 10 10 45  0 45 10 25  0  0 45 10 25  0  0]</span><br><span class="line"> [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]</span><br><span class="line"> [ 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0]]</span><br><span class="line"> ----- Computation time = 0.0ms</span><br><span class="line">elementwise multiplication = [81  4 10  0  0 63 10  0  0  0 81  4 25  0  0]</span><br><span class="line"> ----- Computation time = 0.0ms</span><br><span class="line">gdot = [ 21.57937154  22.58814194  13.70092277]</span><br><span class="line"> ----- Computation time = 0.0ms</span><br></pre></td></tr></table></figure>
+<p>总的来说还是根据sgmoid公式来进行概率的预测</p>
+<p>先初始化w和b  然后通过梯度下降来优化获得更好的w和b</p>
+<p>然后通过预测函数来进行概率预测</p>
+<h3 id="总结逻辑回归需要先算"><a href="#总结逻辑回归需要先算" class="headerlink" title="总结逻辑回归需要先算"></a>总结逻辑回归需要先算</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917193629126.png" alt="image-20230917193629126"></p>
+<p>然后算 $\vartheta (\hat{z} )$ 也就是sigmoid(z)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917103418475.png" alt="image-20230917103418475"></p>
+<h1 id="什么是神经网络"><a href="#什么是神经网络" class="headerlink" title="什么是神经网络"></a>什么是神经网络</h1><p>如上图，类比与监督学习的逻辑回归来说  神经网络就是多个</p>
+<p>逻辑回归叠加的结果，叠加后到达下一层。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200415163553547.png" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917105353093.png" alt="image-20230917105353093"></p>
+<p>首先你需要输入特征 x ，参数 w 和b ，通过这些你就可以计算出  z ，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917105433820.png" alt="image-20230917105433820"></p>
+<p>接下来使用就可以计算出 a aa 。我们将的符号换为表示输出 y ^ → a = σ ( z ) \hat{y}\rightarrow a=\sigma(z)<br>y<br>^</p>
+<p> →a=σ(z) ,然后可以计算出loss function L ( a , y ) L(a,y)L(a,y)</p>
+<p>神经网络看起来是如下这个样子。正如我之前已经提到过，你可以把许多sigmoid单元堆叠起来形成一个神经网络。对于图3.1.1中的节点，它包含了之前讲的计算的两个步骤：首先通过公式计算出值z ，然后通过 σ ( z ) \sigma(z)σ(z) 计算值 a 。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200415163612515.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>这个神经网络对于三个节点  首先计算第一层网络中的各个相关的数$z^{[1]} $</p>
+<p>，接着计算$a^{[1]}$接着计算下一层网络 等等  意思就是不同层使用$^{[m]}$代表第m层中节点相关的数，这些节点的集合被称为第m层网络。</p>
+<p>这样可以保证$^{[m]}$不会和我们之前标识单个训练样本的$^{(i)}$混淆 公式3.3如下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917110321224.png" alt="image-20230917110321224"></p>
+<p>类似逻辑回归，在计算后需要使用计算，接下来你需要使用另外一个线性方程对应的参数计算 $z^{[2]}$然后计算$a^{[2]}$</p>
+<p>  ，此时 $a^{[2]}$ 就是整个神经网络最终的输出，用$\hat{y}$ </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917110729088.png" alt="image-20230917110729088"></p>
+<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3><h1 id="神经网络表示"><a href="#神经网络表示" class="headerlink" title="神经网络表示"></a>神经网络表示</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200416173622491.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>我们有输入特征 x 1 、 x 2 、 x 3 x_1、x_2、x_3x<br>1</p>
+<p> 、x<br>2</p>
+<p> 、x<br>3</p>
+<p>  ，它们被竖直地堆叠起来，这叫做神经网络的输入层(Input Layer)。它包含了神经网络的输入；然后这里有另外一层我们称之为隐藏层(Hidden Layer)（图3.2.1的四个结点）。待会儿我会回过头来讲解术语”隐藏”的意义；在本例中最后一层只由一个结点构成，而这个只有一个结点的层被称为输出层(Output Layer)，它负责产生预测值。解释隐藏层的含义：在一个神经网络中，当你使用监督学习训练它的时候，训练集包含了输入 x xx 也包含了目标输出 y yy ，所以术语隐藏层的含义是在训练集中，这些中间结点的准确值我们是不知道到的，也就是说你看不见它们在训练集中应具有的值。你能看见输入的值，你也能看见输出的值，但是隐藏层中的东西，在训练集中你是无法看到的。所以这也解释了词语隐藏层，只是表示你无法在训练集中看到他们。</p>
+<p>现在讲层数 </p>
+<p>就像我们之前用向量 x  表示输入特征。这里有个可代替的记号 $ a^{[0]}$可以用来表示输入特征。 a  表示激活的意思，它意味着网络中不同层的值会传递到它们后面的层中，输入层将 x 传递给隐藏层，所以我们将输入层的激活值称为 $a^{[0]}$ 下一层即隐藏层也同样会产生一些激活值，那么我将其记作 $a^{[1]}$ ，所以具体地，这里的第一个单元或结点我们将其表示为 $a<em>{1}^{[1]}$   ，第二个结点的值我们记为 $ a</em>{2}^{[1]}$ 以此类推。所以这里的是一个四维的向量如果写成Python代码，那么它是一个规模为4x1的矩阵或一个大小为4的列向量，如下公式，它是四维的，因为在本例中，我们有四个结点或者单元，或者称为四个隐藏层单元</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917112841893.png" alt="image-20230917112841893"></p>
+<p>最后输出层将产生某个数值 a  ，它只是一个单独的实数，所以 $ \hat{y}$ 的值将取为 $a^{[2]}$  。这与逻辑回归很相似，在逻辑回归中，我们有 y$^ \hat{y}$   直接等于 a  ，在逻辑回归中我们只有一个输出层，所以我们没有用带方括号的上标。但是在神经网络中，我们将使用这种带上标的形式来明确地指出这些值来自于哪一层，有趣的是在约定俗成的符号传统中，在这里你所看到的这个例子，只能叫做一个两层的神经网络（如下图）。原因是当我们计算网络的层数时，输入层是不算入总层数内，所以隐藏层是第一层，输出层是第二层。第二个惯例是我们将输入层称为第零层，所以在技术上，这仍然是一个三层的神经网络，因为这里有输入层、隐藏层，还有输出层。但是在传统的符号使用中，如果你阅读研究论文或者在这门课中，你会看到人们将这个神经网络称为一个两层的神经网络，因为我们不将输入层看作一个标准的层。同理w和b加上上标也是对应不同层的不同参数类似$ w^{[1]}$ 和$b^{[1]}$</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917113049572.png" alt="image-20230917113049572"></p>
+<p>接下来是对各个层的神经单元进行的公式举例如图<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917191923227.png" alt="image-20230917191923227"></p>
+<p>当然这个用四个for循环效率太低   可以使之向量化从而减轻运算量</p>
+<p>如</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917192457917.png" alt="image-20230917192457917"></p>
+<p>上面相乘是 4x3矩阵 乘以 3x1的矩阵在加一个4x1的矩阵从而得到$z^{[1]}$</p>
+<p> w一开始是3x4的</p>
+<p>接下来是向量化</p>
+<p>注意$a^{<a href="i">1</a>}$ 这里的i标识第几个样本 1标识第一层神经网路</p>
+<p>m个样本要计算实现这四个公式</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917195503865.png" alt="image-20230917195503865"></p>
+<p>接下来就是将向量横向堆积的过程<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917201131159.png" alt="image-20230917201131159"></p>
+<p>这里具体就是将${z^{<a href="1">1</a>},z^{<a href="2">1</a>}…….z^{<a href="m">1</a>}}$进行堆积形成$Z^{[1]}$然后通过$\vartheta (z^{<a href="1">1</a>}),\vartheta (z^{<a href="2">1</a>})…….\vartheta (z^{<a href="m">1</a>})$向量横向排列形成$A^{[a]}$</p>
+<p>像这样</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917201739141.png" alt="image-20230917201739141"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917201941190.png" alt="image-20230917201941190"></p>
+<p>经过此处导可以得出$z^{[1]} = w^{[1]}X + b^{[1]}$</p>
+<p>如下图  </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917202420741.png" alt="image-20230917202420741"></p>
+<h3 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h3><p>这里有sigmoid函数和tanh函数<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917202959386.png" alt="image-20230917202959386"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917203115556.png" alt="image-20230917203115556"></p>
+<p>其实tanh函数是sigmoid函数平移的结果</p>
+<p>tanh函数更好用 </p>
+<p>sigmoid函数和tanh函数两者共同的缺点是，在 z 特别大或者特别小的情况下，导数的梯度或者函数的斜率会变得特别小，最后就会接近于0，导致降低梯度下降的速度。</p>
+<p>机械学习中还有这个函数ReLu修正线性单元</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230917203802613.png" alt="image-20230917203802613"></p>
+<p>选择激活函数有技巧：</p>
+<p>如果输出是0、1值（二分类问题），则输出层选择sigmoid函数，然后其它的所有单元都选择Relu函数。</p>
+<p>这是很多激活函数的默认选择，如果在隐藏层上不确定使用哪个激活函数，那么通常会使用Relu激活函数。有时，也会使用tanh激活函数，但Relu的一个优点是：当 z zz 是负值的时候，导数等于0。</p>
+<p>这里也有另一个版本的Relu被称为Leaky Relu。</p>
+<p>当 z zz 是负值时，这个函数的值不是等于0，而是轻微的倾斜，如图。</p>
+<p>这个函数通常比Relu激活函数效果要好，尽管在实际中Leaky ReLu使用的并不多。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200416195840688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h3 id="为什么要用非线性激活函数？"><a href="#为什么要用非线性激活函数？" class="headerlink" title="为什么要用非线性激活函数？"></a>为什么要用非线性激活函数？</h3><p>实证明，如果你使用线性激活函数或者没有使用一个激活函数，那么无论你的神经网络有多少层一直在做的只是计算线性函数，所以不如直接去掉全部隐藏层。在我们的简明案例中，事实证明如果你在隐藏层用线性激活函数，在输出层用sigmoid函数，那么这个模型的复杂度和没有任何隐藏层的标准Logistic回归是一样的，如果你愿意的话，可以证明一下。</p>
+<p>在这里线性隐层一点用也没有，因为这两个线性函数的组合本身就是线性函数，所以除非你引入非线性，否则你无法计算更有趣的函数，即使你的网络层数再多也不行；只有一个地方可以使用线性激活函数——— g ( z ) = z ，就是你在做机器学习中的回归问题。 y yy 是一个实数，举个例子，比如你想预测房地产价格， y  就不是二分类任务0或1，而是一个实数，从0到正无穷。如果 y y是个实数，那么在输出层用线性激活函数也许可行，你的输出也是一个实数，从负无穷到正无穷。</p>
+<p>总而言之，不能在隐藏层用线性激活函数，可以用ReLU或者tanh或者leaky ReLU或者其他的非线性激活函数，唯一可以用线性激活函数的通常就是输出层；除了这种情况，会在隐层用线性函数的，除了一些特殊情况，比如与压缩有关的，那方面在这里将不深入讨论。在这之外，在隐层使用线性激活函数非常少见。因为房价都是非负数，所以我们也可以在输出层使用ReLU函数这样你的 $\hat{y}$ 都大于等于0。</p>
+<h3 id="正向传播和反向传播的区别3-9-神经网络的梯度下降法-深度学习-Stanford吴恩达教授-吴恩达梯度下降法的公式-Zhao-Jichao的博客-CSDN博客"><a href="#正向传播和反向传播的区别3-9-神经网络的梯度下降法-深度学习-Stanford吴恩达教授-吴恩达梯度下降法的公式-Zhao-Jichao的博客-CSDN博客" class="headerlink" title="正向传播和反向传播的区别3.9 神经网络的梯度下降法-深度学习-Stanford吴恩达教授_吴恩达梯度下降法的公式_Zhao-Jichao的博客-CSDN博客"></a>正向传播和反向传播的区别<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36815313/article/details/105340791">3.9 神经网络的梯度下降法-深度学习-Stanford吴恩达教授_吴恩达梯度下降法的公式_Zhao-Jichao的博客-CSDN博客</a></h3><p>为什么要反向传播？  </p>
+<h4 id="反向传播就是为了实现最优化，省去了重复的求导步骤"><a href="#反向传播就是为了实现最优化，省去了重复的求导步骤" class="headerlink" title="反向传播就是为了实现最优化，省去了重复的求导步骤"></a>反向传播就是为了实现最优化，省去了重复的求导步骤</h4><p>这里不详细讨论方向传播算法的原理了，简单来说这种方法利用了函数求导的链式法则，从输出层到输入层逐层计算模型参数的梯度值，只要模型中每个计算都能求导，那么这种方法就没问题。可以看到按照这个方向计算梯度，各个神经单元只计算了一次，没有重复计算。这个计算方向能够高效的根本原因是，在计算梯度时前面的单元是依赖后面的单元的计算，而“从后向前”的计算顺序正好“解耦”了这种依赖关系，先算后面的单元，并且记住后面单元的梯度值，计算前面单元之就能充分利用已经计算出来的结果，避免了重复计算。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/johnny_love_1968/article/details/117598649?ops_request_misc=%7B%22request%5Fid%22%3A%22169495764016800227457180%22%2C%22scm%22%3A%2220140713.130102334..%22%7D&amp;request_id=169495764016800227457180&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-117598649-null-null.142^v94^insert_down1&amp;utm_term=反向传播原理&amp;spm=1018.2226.3001.4187">深度学习——反向传播（Backpropagation）_南方惆怅客的博客-CSDN博客</a></p>
+<p>首先，你需要正向传播，来计算z对w的偏导，进而求出sigmoid’(z)是多少。然后，根据输出层输出的数据进行反向传播，计算出l对z的偏导是多少，最后，代入到公式0当中，即可求出l对w的偏导是多少。注意，这个偏导，其实反应的就是梯度。然后我们利用梯度下降等方法，对这个w不断进行迭代（也就是权值优化的过程），使得损失函数越来越小，整体模型也越来越接近于真实值。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36815313/article/details/105341107">3.10 直观理解反向传播-深度学习-Stanford吴恩达教授_Zhao-Jichao的博客-CSDN博客</a></p>
+<h3 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h3><p>一句话就是初始化不要全部为0，要随机初始化</p>
+<p>如果 w  很大，那么你很可能最终停在（甚至在训练刚刚开始的时候） z z很大的值，这会造成tanh/Sigmoid激活函数饱和在龟速的学习上，如果你没有sigmoid/tanh激活函数在你整个的神经网络里，就不成问题。但如果你做二分类并且你的输出单元是Sigmoid函数，那么你不会想让初始参数太大，因此这就是为什么乘上0.01或者其他一些小数是合理的尝试。对于 $ w^{[2]}$   一样，就是np.random.randn((1,2))，我猜会是乘以0.01。</p>
+<p>事实上有时有比0.01更好的常数，当你训练一个只有一层隐藏层的网络时（这是相对浅的神经网络，没有太多的隐藏层），设为0.01可能也可以。但当你训练一个非常非常深的神经网络，你可能要试试0.01以外的常数。下一节课我们会讨论怎么并且何时去选择一个不同于0.01的常数，但是无论如何它通常都会是个相对小的数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230918105011317.png" alt="image-20230918105011317"></p>
+<p>就比如这个图 假如给的w参数很大  那么生成的z就很大  z 很大就会导致激活函数处在末端  也就是图中箭头位置 </p>
+<p>那么从图中看出该出斜率比较平缓，从而导致计算反向梯度的时候会很慢。</p>
+<h1 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h1><h1 id="正向传播-反向传播"><a href="#正向传播-反向传播" class="headerlink" title="正向传播  反向传播"></a>正向传播  反向传播</h1><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230919170349561.png" alt="image-20230919170349561"></p>
+<p>向量化版本</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230919170642156.png" alt="image-20230919170642156"></p>
+<p>意思就是i先算出$da^{[l]}$</p>
+<p>然后得出$da^{[l-1]}$,$dw^{[l]}$,$db^{[l]}$</p>
+<p>深度神经网络学习中 正向传播可能不同隐藏层有着不同的激活函数  然后得到损失函数后 在进行迭代 反向传播  </p>
+<p>如下图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230919171014362.png" alt="image-20230919171014362"></p>
+<h2 id="计算正向传播的矩阵维度会有一个规律"><a href="#计算正向传播的矩阵维度会有一个规律" class="headerlink" title="计算正向传播的矩阵维度会有一个规律"></a>计算正向传播的矩阵维度会有一个规律</h2><p>核对矩阵维数</p>
+<p>w 的维度是（下一层的维数，前一层的维数），即 $w^{[l]}:(n^{[l]},n^{[l-1]})$</p>
+<p>b 的维度是（下一层的维数，1） $b^{[l]}:(n^{[l]},1)$</p>
+<p>同理  $dw^{[l]}:(n^{[l]},n^{[l-1]})$</p>
+<p> $db^{[l]}:(n^{[l]},1)$</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200407170126326.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>单个数据样本$W^{[l]}：(n^{[1]},1)$时候  矩阵乘法很容易理解$z^{[1]} = w^{[1]}x + b^{1}$  $z^{[2]} = w^{[2]}a^{[1]} + b^{2}$</p>
+<p>此时$a^{[2]} = g(z^{[1]})$   同理将多个数据样本平铺起来的时候变成平铺的向量</p>
+<p>变成如下图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200407170144205.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://piged-brother.github.io">猪头弟弟</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://piged-brother.github.io/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/">http://piged-brother.github.io/2023/10/11/吴恩达深度学习课程第一课/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://piged-brother.github.io" target="_blank">猪头弟弟</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/" title="吴恩达深度学习课程第二课"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">吴恩达深度学习课程第二课</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">猪头弟弟</div><div class="author-info__description">欲买桂花同载酒，终不似，少年游。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/piged-brother"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/wq2571931803" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=2571931803&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:2571931803@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">just so so!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E5%85%83%E5%88%86%E7%B1%BB"><span class="toc-text">二元分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#logistic%E5%9B%9E%E5%BD%92"><span class="toc-text">logistic回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%9A%E6%98%AF%E8%A1%A1%E9%87%8F%E5%8D%95%E4%B8%80%E8%AE%AD%E7%BB%83%E6%A0%B7%E4%BE%8B%E7%9A%84%E6%95%88%E6%9E%9C"><span class="toc-text">损失函数：是衡量单一训练样例的效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E6%9C%AC%E5%87%BD%E6%95%B0-%E8%A1%A1%E9%87%8Fw%E5%92%8Cb%E7%9A%84%E6%95%88%E6%9E%9C"><span class="toc-text">成本函数:衡量w和b的效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%EF%BC%9A%E6%89%BE%E5%88%B0%E6%9C%80%E5%B0%8F%E7%9A%84%E6%88%90%E6%9C%AC%E5%87%BD%E6%95%B0"><span class="toc-text">梯度下降法：找到最小的成本函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%A2%AF%E5%BA%A6"><span class="toc-text">计算梯度</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%8C%96%EF%BC%9A%E5%8A%A0%E9%80%9F%E8%AE%A1%E7%AE%97%EF%BC%8C%E6%91%86%E8%84%B1%E6%98%BE%E7%A4%BAfor%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-text">向量化：加速计算，摆脱显示for循环语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E5%8C%96%E7%9A%84logistic%E5%9B%9E%E5%BD%92"><span class="toc-text">向量化的logistic回归</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E9%9C%80%E8%A6%81%E5%85%88%E7%AE%97"><span class="toc-text">总结逻辑回归需要先算</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">什么是神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"> </span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%A1%A8%E7%A4%BA"><span class="toc-text">神经网络表示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-text">激活函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="toc-text">为什么要用非线性激活函数？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%90%91%E4%BC%A0%E6%92%AD%E5%92%8C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%9A%84%E5%8C%BA%E5%88%AB3-9-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-Stanford%E5%90%B4%E6%81%A9%E8%BE%BE%E6%95%99%E6%8E%88-%E5%90%B4%E6%81%A9%E8%BE%BE%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95%E7%9A%84%E5%85%AC%E5%BC%8F-Zhao-Jichao%E7%9A%84%E5%8D%9A%E5%AE%A2-CSDN%E5%8D%9A%E5%AE%A2"><span class="toc-text">正向传播和反向传播的区别3.9 神经网络的梯度下降法-深度学习-Stanford吴恩达教授_吴恩达梯度下降法的公式_Zhao-Jichao的博客-CSDN博客</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E5%B0%B1%E6%98%AF%E4%B8%BA%E4%BA%86%E5%AE%9E%E7%8E%B0%E6%9C%80%E4%BC%98%E5%8C%96%EF%BC%8C%E7%9C%81%E5%8E%BB%E4%BA%86%E9%87%8D%E5%A4%8D%E7%9A%84%E6%B1%82%E5%AF%BC%E6%AD%A5%E9%AA%A4"><span class="toc-text">反向传播就是为了实现最优化，省去了重复的求导步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">随机初始化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#-1"><span class="toc-text"> </span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%90%91%E4%BC%A0%E6%92%AD-%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="toc-text">正向传播  反向传播</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%AD%A3%E5%90%91%E4%BC%A0%E6%92%AD%E7%9A%84%E7%9F%A9%E9%98%B5%E7%BB%B4%E5%BA%A6%E4%BC%9A%E6%9C%89%E4%B8%80%E4%B8%AA%E8%A7%84%E5%BE%8B"><span class="toc-text">计算正向传播的矩阵维度会有一个规律</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/" title="吴恩达深度学习课程第一课"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="吴恩达深度学习课程第一课"/></a><div class="content"><a class="title" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/" title="吴恩达深度学习课程第一课">吴恩达深度学习课程第一课</a><time datetime="2023-10-11T12:39:33.000Z" title="发表于 2023-10-11 20:39:33">2023-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/" title="吴恩达深度学习课程第二课"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="吴恩达深度学习课程第二课"/></a><div class="content"><a class="title" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/" title="吴恩达深度学习课程第二课">吴恩达深度学习课程第二课</a><time datetime="2023-10-11T12:21:00.000Z" title="发表于 2023-10-11 20:21:00">2023-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/16/%E5%82%BB%E9%80%BC%E5%8F%B6%E5%AD%90-1/" title="致叶子"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://pic.kts.g.mi.com/933ac389af7423e602592eecaa5d62077883583152532710569.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="致叶子"/></a><div class="content"><a class="title" href="/2023/05/16/%E5%82%BB%E9%80%BC%E5%8F%B6%E5%AD%90-1/" title="致叶子">致叶子</a><time datetime="2023-05-16T14:57:36.000Z" title="发表于 2023-05-16 22:57:36">2023-05-16</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By 猪头弟弟</div><div class="footer_custom_text">if i cant see you .. good mornin .. good evening .. and good night</div><div id="running-time"></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-api-mu-wheat.vercel.app/',
+      region: 'ap-jiangxi',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-api-mu-wheat.vercel.app/',
+      region: 'ap-jiangxi',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Qi6WjJTanZWDtvQZo4Scf9IZ-gzGzoHsz',
+      appKey: 'K6UDwBqMjHayr9sWQPcZlxsh',
+      avatar: 'monsterid',
+      serverURLs: 'https://qi6wjjta.lc-cn-n1-shared.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/weather.js"></script><script>setInterval(()=>{let create_time=Math.round(new Date("2020-3-21-20:14:00").getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600}if(second>=3600){time[2]=parseInt(second/3600);second%=3600}if(second>=60){time[3]=parseInt(second/60);second%=60}if(second>0){time[4]=second}currentTimeHtml='小破站已经安全运行 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';var elementById=document.getElementById('running-time');if(elementById){elementById.innerHTML=currentTimeHtml}},1000);</script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="w,d,n,m,d" data-fontsize="15px" data-random="false" async="async"></script><script>(function(d, w, c) {
+    w.ChatraID = 'oCi2xHdNfKnfMGvfh';
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://call.chatra.io/chatra.js';
+    if (d.head) d.head.appendChild(s);
+})(document, window, 'Chatra');
+
+if (true) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      Chatra('openChat')
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      Chatra('hide')
+    }
+    function chatBtnShow () {
+      Chatra('show')
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>吴恩达深度学习课程第二课 | 猪头弟弟</title><meta name="author" content="猪头弟弟"><meta name="copyright" content="猪头弟弟"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[TOC] 什么是方差和偏差？方差：如果一个模型的方差较高，意味着模型对于训练数据的小变化非常敏感，可能会导致过拟合（Overfitting）的问题， 偏差：偏差衡量了模型的预测值与实际观测值之间的差异或偏移。具体来说，它表示了模型在训练数据上的平均预测误差。如果一个模型的偏差较高，意味着模型在训练数据上不能很好地拟合，可能会导致欠拟合（Underfitting）的问题 欠拟合就是没把大头当回事，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="吴恩达深度学习课程第二课">
+<meta property="og:url" content="http://piged-brother.github.io/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/index.html">
+<meta property="og:site_name" content="猪头弟弟">
+<meta property="og:description" content="[TOC] 什么是方差和偏差？方差：如果一个模型的方差较高，意味着模型对于训练数据的小变化非常敏感，可能会导致过拟合（Overfitting）的问题， 偏差：偏差衡量了模型的预测值与实际观测值之间的差异或偏移。具体来说，它表示了模型在训练数据上的平均预测误差。如果一个模型的偏差较高，意味着模型在训练数据上不能很好地拟合，可能会导致欠拟合（Underfitting）的问题 欠拟合就是没把大头当回事，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg">
+<meta property="article:published_time" content="2023-10-11T12:21:00.000Z">
+<meta property="article:modified_time" content="2023-10-11T12:37:15.922Z">
+<meta property="article:author" content="猪头弟弟">
+<meta property="article:tag" content="吴恩达深度学习基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg"><link rel="shortcut icon" href="/img/avatar.jpg"><link rel="canonical" href="http://piged-brother.github.io/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '吴恩达深度学习课程第二课',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-11 20:37:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-book"></i><span> 留言板</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="猪头弟弟"><span class="site-name">猪头弟弟</span></a></span><div id="weather"><div id="tp-weather-widget"></div>  </div><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-book"></i><span> 留言板</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">吴恩达深度学习课程第二课</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-11T12:21:00.000Z" title="发表于 2023-10-11 20:21:00">2023-10-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-11T12:37:15.922Z" title="更新于 2023-10-11 20:37:15">2023-10-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/">吴恩达深度学习基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="吴恩达深度学习课程第二课"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>[TOC]</p>
+<h1 id="什么是方差和偏差？"><a href="#什么是方差和偏差？" class="headerlink" title="什么是方差和偏差？"></a>什么是方差和偏差？</h1><p>方差：如果一个模型的方差较高，意味着模型对于训练数据的小变化非常敏感，可能会导致过拟合（Overfitting）的问题，</p>
+<p>偏差：偏差衡量了模型的预测值与实际观测值之间的差异或偏移。具体来说，它表示了模型在训练数据上的平均预测误差。如果一个模型的偏差较高，意味着模型在训练数据上不能很好地拟合，可能会导致欠拟合（Underfitting）的问题</p>
+<p><strong>欠拟合就是没把大头当回事，过拟合就是将偶然太当真</strong></p>
+<p>当涉及到模型的方差和偏差时，可以使用具体的例子来更好地理解这两个概念：</p>
+<p>假设你正在开发一个简单的线性回归模型，用于预测房屋价格。你有一个包含房屋价格和各种特征（例如房屋大小、卧室数量、地理位置等）的数据集。以下是对方差和偏差的具体解释：</p>
+<ol>
+<li>方差：<ul>
+<li>假设你多次随机划分你的数据集为训练集和测试集，然后训练相同的线性回归模型。如果不同训练集上训练的模型对于相同测试集产生的预测结果差异很大，那么模型的方差较高。这可能表示模型对于训练数据的小变化非常敏感。</li>
+<li>例如，如果在一次模型训练中，模型预测某个房屋价值为$300,000，而在另一次训练中，相同模型对同一房屋的预测结果是$350,000，那么模型的方差较高。</li>
+</ul>
+</li>
+<li>偏差：<ul>
+<li>偏差表示模型的预测值与实际观测值之间的平均差异。如果你的线性回归模型对于训练数据集中的大多数房屋都产生了相对较大的预测误差，那么模型的偏差较高。</li>
+<li>例如，如果线性回归模型对于所有房屋都低估了实际价格，那么它具有较高的偏差。</li>
+</ul>
+</li>
+</ol>
+<p>在实际机器学习应用中，你希望找到一个平衡点，使模型的方差和偏差都保持在适度水平。这可能需要尝试不同的模型复杂度（例如，多项式回归的不同阶数）、数据集大小、正则化技术等，以确保你的模型能够在训练数据和未见过的数据上都表现良好。这个平衡点有助于防止过拟合和欠拟合，从而获得更好的泛化性能。</p>
+<h1 id="如何解决？"><a href="#如何解决？" class="headerlink" title="如何解决？"></a>如何解决？</h1><p>偏差高：欠拟合了，增加模型复杂度，先提升训练集上的性能，</p>
+<p>方差高：扩充数据集、正则化、或者其他模型结构来解决高方差</p>
+<h2 id="正则化："><a href="#正则化：" class="headerlink" title="正则化："></a>正则化：</h2><p>意思就是在成本函数J找到最小值  但是i成本函数更改了一点 加上了omit  $L_{2}$ regulazation 函数</p>
+<p>此方法称为 L 2 正则化。因为这里用了欧几里德法线，被称为向量参数w 的 L 2 范数。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230923114941305.png" alt="image-20230923114941305"></p>
+<h3 id="为什么正则化可以减少过度拟合？"><a href="#为什么正则化可以减少过度拟合？" class="headerlink" title="为什么正则化可以减少过度拟合？"></a>为什么正则化可以减少过度拟合？</h3><ul>
+<li>L1正则化通常用于特征选择和稀疏建模，因为它倾向于将某些参数压缩到零，从而实现了特征选择的效果。</li>
+<li>L2正则化有助于改善模型的稳定性和泛化能力，但不会将参数压缩到零，因此它不太适用于特征选择，而更适合用于降低模型的复杂性。</li>
+<li></li>
+</ul>
+<p><strong>复杂性惩罚</strong>：正则化向模型的损失函数添加一个正则化项，该项惩罚复杂模型。正则化项的大小由正则化强度参数（通常表示为λ）控制。</p>
+<p><strong>特征选择</strong>：在L1正则化等一些技术中，正则化会导致某些模型参数变为零，从而实现了特征选择。这意味着模型忽略了一些不重要的特征，只保留了与任务相关的特征。</p>
+<p><strong>降低参数之间的相关性</strong>：L2正则化等技术可以减小参数的幅度，从而降低了参数之间的相关性。相关性较高的参数可能导致模型对输入数据中的小变化过于敏感。</p>
+<p><strong>泛化性能</strong>：正则化的主要目标是改善模型在未见过的数据上的性能，即提高模型的泛化性能。通过控制模型的复杂性，正则化可以帮助模型更好地适应新数据，而不仅仅是训练数据。</p>
+<h4 id="为什么L1会导致某些w参数越来越小-？"><a href="#为什么L1会导致某些w参数越来越小-？" class="headerlink" title="为什么L1会导致某些w参数越来越小 ？"></a>为什么L1会导致某些w参数越来越小 ？</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230923161950227.png" alt="image-20230923161950227"></p>
+<p>求出$dw^{[l]}$后进行$w^{[l]}$更新时候 会导致</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230923162031753.png" alt="image-20230923162031753"></p>
+<p>  $w^{[l]}$时刻变小</p>
+<h1 id="Dropout正则化"><a href="#Dropout正则化" class="headerlink" title="Dropout正则化"></a>Dropout正则化</h1><p>意思就是i随机失活神经网络层的某层的各个节点 ，以便解决过度拟合的问题。</p>
+<h3 id="如何实施？"><a href="#如何实施？" class="headerlink" title="如何实施？"></a>如何实施？</h3><p>常用的</p>
+<p>即inverted dropout（反向随机失活），出于完整性考虑，我们用一个三层（ l = 3  ）网络来举例说明。编码中会有很多涉及到3的地方。我只举例说明如何在某一层中实施dropout。</p>
+<h5 id="1-首先要定义向量-d-，-d-3-表示一个三层的dropout向量："><a href="#1-首先要定义向量-d-，-d-3-表示一个三层的dropout向量：" class="headerlink" title="1.首先要定义向量 d ， $d^{[3]}$  表示一个三层的dropout向量："></a>1.首先要定义向量 d ， $d^{[3]}$  表示一个三层的dropout向量：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d3=np.random.rand(a3.shape[0],a3.shape[1])</span><br></pre></td></tr></table></figure>
+<p>然后看它是否小于某数，我们称之为keep-prob，keep-prob是一个具体数字，上个示例中它是0.5，而本例中它是0.8，它表示保留某个隐藏单元的概率，此处keep-prob等于0.8，它意味着消除任意一个隐藏单元的概率是0.2，它的作用就是生成随机矩阵，如果对 $ a^{[3]}$进行因子分解，效果也是一样的。$d^{[3]}$  是一个矩阵，每个样本和每个隐藏单元，其中$ d^{[3]}$</p>
+<h5 id="2接下来就是将获取的激活函数与得到的d3矩阵乘一下-去掉某些节点"><a href="#2接下来就是将获取的激活函数与得到的d3矩阵乘一下-去掉某些节点" class="headerlink" title="2接下来就是将获取的激活函数与得到的d3矩阵乘一下 去掉某些节点"></a>2接下来就是将获取的激活函数与得到的d3矩阵乘一下 去掉某些节点</h5><p>接下来要做的就是从第三层中获取激活函数，这里我们叫它 $ a^{[3]} $ , $  a^{[3]} $  含有要计算的激活函数，  $  a^{[3]} $<br>  等于上面的 $ a^{[3]} $  乘以  $  d^{[3]} $  ，a3 =np.multiply(a3,d3)，这里是元素相乘，也可写为  $ a^{[3]}*=d^{[3]} $<br>  ，它的作用就是让  $  d^{[3]} $ 中所有等于0的元素（输出），而各个元素等于0的概率只有20%，乘法运算最终把 $  d^{[3]} $<br>中相应元素输出，即让  $  d^{[3]} $ 中0元素与  $  a^{[3]} $ 中相对元素归零。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200408165715591.png#pic_center" alt="img"></p>
+<p>如果用python实现该算法的话，$ d^{[3]}$  则是一个布尔型数组，值为true和false，而不是1和0，乘法运算依然有效，python会把true和false翻译为1和0，</p>
+<h5 id="3最后我们向外扩展-a-3-用它初一0-8，或者说是除以keep-prob的参数"><a href="#3最后我们向外扩展-a-3-用它初一0-8，或者说是除以keep-prob的参数" class="headerlink" title="3最后我们向外扩展$ a^{[3]}$,用它初一0.8，或者说是除以keep-prob的参数"></a>3最后我们向外扩展$ a^{[3]}$,用它初一0.8，或者说是除以keep-prob的参数</h5><p>为什么除以这个参数  意思就是最后我们得到$z^{[4]}$的时候 由于$z^4 = w^{[4]} * a^{[3]} + b^{[4]}$所以 $a^{[3]}$中有些元素被归零影响得到$z^{[4]}$的值</p>
+<p>所以要除以keep-prob参数 弥补那损失的值</p>
+<p>总结：Dropout方法参数尽量处在0.9左右 因为大量的失活可能会导致一些 </p>
+<h2 id="其他正则化方法："><a href="#其他正则化方法：" class="headerlink" title="其他正则化方法："></a>其他正则化方法：</h2><p>一.数据扩增</p>
+<p>就是将一组数据变形进而加入训练集，从而增加训练集。</p>
+<p>二.<strong>early stopping</strong></p>
+<p>就是训练代价函数J 的时候优化到一定的值后就停止优化。</p>
+<p><strong>early stopping</strong>代表提早停止训练神经网络，但是你并不知道什么时候停止。</p>
+<h1 id="归一化输入"><a href="#归一化输入" class="headerlink" title="归一化输入"></a>归一化输入</h1><p>第一步是零均值化。 </p>
+<p>第二步是归一化方差</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200408195806849.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>意思就是要让数据在一个范围内，不然处理的时候可能会有偏差。不然做梯度下降的时候可能会很慢。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200408195926132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<h3 id="梯度消失和梯度爆炸"><a href="#梯度消失和梯度爆炸" class="headerlink" title="梯度消失和梯度爆炸"></a>梯度消失和梯度爆炸</h3><p>意思就是在进行梯度计算的时候梯度优化w的时候可能会进行指数增长或者指数下降，层数躲起来的时候可能会对神经网络</p>
+<p>计算产生影响。</p>
+<p>下面是梯度爆炸和消失 就是 1.5的n次方和0.5的n次方一个接近无穷一个接近0 这就会导致梯度爆炸和消失</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230923212606523.png" alt="image-20230923212606523"></p>
+<h3 id="神经网络的权重初始化"><a href="#神经网络的权重初始化" class="headerlink" title="神经网络的权重初始化"></a>神经网络的权重初始化</h3><p>意思就是初始化W根据不同的激活函数得到不同的权重初始化值</p>
+<ul>
+<li>权重$W^{[l]}$应该随机初始化以打破对称性。</li>
+<li>将偏差$b^{[l]}$初始化为零是可以的。只要随机初始化了$W^{[l]}$，对称性仍然会破坏。</li>
+</ul>
+<h4 id="梯度检验1-13-梯度检验-深度学习第二课《改善深层神经网络》-Stanford吴恩达教授-Zhao-Jichao的博客-CSDN博客"><a href="#梯度检验1-13-梯度检验-深度学习第二课《改善深层神经网络》-Stanford吴恩达教授-Zhao-Jichao的博客-CSDN博客" class="headerlink" title="梯度检验1.13 梯度检验-深度学习第二课《改善深层神经网络》-Stanford吴恩达教授_Zhao-Jichao的博客-CSDN博客"></a>梯度检验<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36815313/article/details/105399140">1.13 梯度检验-深度学习第二课《改善深层神经网络》-Stanford吴恩达教授_Zhao-Jichao的博客-CSDN博客</a></h4><ul>
+<li>梯度检验可验证反向传播的梯度与梯度的数值近似值之间的接近度（使用正向传播进行计算）。</li>
+<li>梯度检验很慢，因此我们不会在每次训练中都运行它。通常，你仅需确保其代码正确即可运行它，然后将其关闭并将backprop用于实际的学习过程。</li>
+</ul>
+<p>[TOC]</p>
+<h1 id="mini-batch-梯度下降法"><a href="#mini-batch-梯度下降法" class="headerlink" title="mini-batch 梯度下降法"></a>mini-batch 梯度下降法</h1><p>意思就是向量化能够让你有效地对所有 m mm 个样本进行计算，允许你处理整个训练集，而无需某个明确的公式。所以我们要把训练样本放大巨大的矩阵 X XX 当中去，但是向量如果变得多了比如500 万个或者是更大的数，在对整个训练集执行梯度下降法时候，一个个的去正向传播会很慢。</p>
+<p>所以如下图引入了一个子集 就是每个子集上面存放1000个X向量 ，在些子集被称为<strong>mini</strong>-<strong>batch</strong> 可以分成5000个 这个时候就得5000个<strong>mini-batch</strong> </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200409142901171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>同理对Y也进行相同的处理，也要相应地拆分 Y  的训练集。Y和X一样分成5000个<strong>mini-batch</strong>集合。</p>
+<p>然后执行向前传播和梯度下降</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410102601470.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926130913272.png" alt="image-20230926130913272"></p>
+<h2 id="之前我们学习的神将网络梯度下降叫batch下降法"><a href="#之前我们学习的神将网络梯度下降叫batch下降法" class="headerlink" title="之前我们学习的神将网络梯度下降叫batch下降法"></a>之前我们学习的神将网络梯度下降叫batch下降法</h2><h3 id="batch下降法和mini-batch下降法有什么不一样吗？"><a href="#batch下降法和mini-batch下降法有什么不一样吗？" class="headerlink" title="batch下降法和mini-batch下降法有什么不一样吗？"></a>batch下降法和mini-batch下降法有什么不一样吗？</h3><p><strong>batch</strong>下降法每次都需要对整个数据集进行遍历，每次迭代都 需要对整个数据集进行前向传播和反向传播，计算出全局梯度。通常用于小型计算集</p>
+<p><strong>Mini-Batch </strong>下降法 可以将数据分成小批量，并且每次计算梯度，只是针对每次的小批量来进行计算，更高效。如图</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/202004101101026.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>绿色线条为minibatch下降  紫色为随机梯度下降  蓝色为batch梯度下降</p>
+<p>绿色更少更快</p>
+<h1 id="指数加权平均"><a href="#指数加权平均" class="headerlink" title="指数加权平均"></a>指数加权平均</h1><p>什么是指数加权呢？ 吴恩达视频中用了一个测量美国温度的例子来举例说明这个问题。让温度函数设置为$v<em>t = 0.9v</em>(t-1) + 0.1  \theta_(t)$ 类似如下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410111115746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>然后通过β的值来挑取天数</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410111140546.png" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926152736038.png" alt="image-20230926152736038"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410111151384.png" alt="img"></p>
+<p>就这样通过不同的数值来选取不同的天数从得到温度曲线</p>
+<p>β=0.5   得到平均了2天的温度  运行得到黄线</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410111213618.png" alt="img"></p>
+<h2 id="如何理解加权平均数"><a href="#如何理解加权平均数" class="headerlink" title="如何理解加权平均数"></a>如何理解加权平均数</h2><p>关键方程 $v<em>t = 0.9v</em>(t-1) + 0.1  \theta_(t)$</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926161405496.png" alt="image-20230926161405496"></p>
+<p>所以这是一个加和并平均，100号数据，也就是当日温度。我们分析 $v_{100}$</p>
+<p>  的组成，也就是在一年第100天计算的数据，但是这个是总和，包括100号数据，99号数据，97号数据等等。画图的一个办法是，假设我们有一些日期的温度，所以这是数据，这是 t ，所以100号数据有个数值，99号数据有个数值，98号数据等等， t 为100，99，98等等，这就是数日的温度数值。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410112315838.png" alt="img"></p>
+<p>然后构建指数衰减函数从0.1开始到 0.1 ∗ 0.9 0.1<em>0.90.1∗0.9 ，到 0.1 ∗ 0. 9 ,0.1</em> * $0.9^2$   ，以此类推，所以就有了这个指数衰减函数。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410112326335.png" alt="img"></p>
+<p>计算 $ v<em>{100}$ 是通过，把两个函数对应的元素，然后求和，用这个数值100号数据值乘以0.1，99号数据值乘以0.1乘以 $0.9^2$<br> ，这是第二项，以此类推，所以选取的是每日温度，将其与指数衰减函数相乘，然后求和，就得到了 $ v</em>{100}$</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/2020041011233963.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926162348778.png" alt="image-20230926162348778"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926162446543.png" alt="image-20230926162446543"></p>
+<p>​     总结：就是通过β的值不同可以预测不同曲线的温度</p>
+<h2 id="偏差修正"><a href="#偏差修正" class="headerlink" title="偏差修正"></a>偏差修正</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410115305389.png" alt="img"></p>
+<p>红色曲线对应β值为0.9  绿色曲线对应β值为0.98  。</p>
+<p>但实际在β=0、98的时候得到的并不是绿色曲线，而是紫色曲线，你可以注意到紫色曲线的起点较低，我们来看看怎么处理。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926164708843.png" alt="image-20230926164708843"></p>
+<p>总结：实用加权平均数偏差修正可以更好的减小误差。达到更精准的数据</p>
+<h2 id="动量梯度下降法"><a href="#动量梯度下降法" class="headerlink" title="动量梯度下降法"></a>动量梯度下降法</h2><p>还有一种算法叫做<strong>Momentum</strong>，或者叫做动量梯度下降法，运行速度几乎总是快于标准的梯度下降算法，简而言之，基本的想法就是计算梯度的指数加权平均数，并利用该梯度更新你的权重，在本视频中，我们呢要一起拆解单句描述，看看你到底如何计算。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410121556353.png" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926171642685.png" alt="image-20230926171642685"></p>
+<p>总结：意思就是在梯度下降的过程中，上下摆动的幅度变得很小，更新参数变得很慢很慢 ，从而需要给一点动量加速梯度下降的过程。反正是</p>
+<p>减少纵轴方向的学习速度 加快横轴学习速度基于这个理念引入</p>
+<h2 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410141914493.png" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926174543211.png" alt="image-20230926174543211"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926174533314.png" alt="image-20230926174533314"></p>
+<p>在横轴也就是w方向 我们希望学习速度快，而在垂直方向，也就是b方向，我们喜欢减缓摆动，所以会希望$S<em>{dw}$相对较小，除以一个较小的数，从而使得W更新后变得不是很小达到加速效果  并且此时希望b方向变得较较小，那么就希望$S</em>{db}$尽量大，使得b更新减去后面的数的时候， 让b更变得尽量小。从而达到目的</p>
+<h2 id="Adam优化算法"><a href="#Adam优化算法" class="headerlink" title="Adam优化算法"></a>Adam优化算法</h2><p>Adam优化算法基本上就是将<strong>Momentum</strong>和<strong>RMSprop</strong>结合在一起，（Monmentum是动量梯度下降的意思<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410144947463.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img">)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926200614510.png" alt="image-20230926200614510"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926200627460.png" alt="image-20230926200627460"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926200646914.png" alt="image-20230926200646914"></p>
+<p>其中<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926200709483.png" alt="image-20230926200709483"></p>
+<p>是个缺省值 可要可不要</p>
+<h2 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h2><p><strong>有指数衰减和mini-batch梯度下降法</strong></p>
+<p>假设你要使用mini-batch梯度下降法，mini-batch数量不大，大概64或者128个样本，在迭代过程中会有噪音（蓝色线），下降朝向这里的最小值，但是不会精确地收敛，所以你的算法最后在附近摆动，并不会真正收敛，因为你用的 α \alphaα 是固定值，不同的mini-batch中有噪音。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410151835648.png" alt="img"></p>
+<p>但要慢慢减少学习率 α \alphaα 的话，在初期的时候， α \alphaα 学习率还较大，你的学习还是相对较快，但随着 α \alphaα 变小，你的步伐也会变慢变小，所以最后你的曲线（绿色线）会在最小值附近的一小块区域里摆动，而不是在训练过程中，大幅度在最小值附近摆动。</p>
+<p>所以慢慢减少 α \alphaα 的本质在于，在学习初期，你能承受较大的步伐，但当开始收敛的时候，小一些的学习率能让你步伐小一些。</p>
+<p>你可以这样做到学习率衰减，记得一代要遍历一次数据，如果你有以下这样的训练集，</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200410151924257.png" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230926201509039.png" alt="image-20230926201509039"></p>
+<p>总结：学习率衰减是加快算法的方法</p>
+<p>什么是超参数？  很简单如cnn中的学习率α或者是<strong>Momentum</strong>（动量梯度下降法）的参数 β  </p>
+<h2 id="超参数的调试"><a href="#超参数的调试" class="headerlink" title="超参数的调试"></a>超参数的调试</h2><p>调试好超参数的范围</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36815313/article/details/105447327">3.2 为超参数选择合适的范围-深度学习第二课《改善深层神经网络》-Stanford吴恩达教授_超学习为超参数选择合适的范围,比如选择神经网络的层数或者确定指数加权平均值中-CSDN博客</a></p>
+<h2 id="超参数的实践-PandasVS-caviar"><a href="#超参数的实践-PandasVS-caviar" class="headerlink" title="超参数的实践  PandasVS caviar"></a>超参数的实践  PandasVS caviar</h2><p>  熊猫方法  vs甩籽方法</p>
+<p>左边是一次只训练一个模型，所以很慢</p>
+<p>右边是同时训练多个模型，对比梯度曲线获得更好的参数 如下图</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200411110602213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></h2><h2 id="正则化网络的激活函数"><a href="#正则化网络的激活函数" class="headerlink" title="正则化网络的激活函数"></a>正则化网络的激活函数</h2><h3 id="1先归一化-2在激活函数"><a href="#1先归一化-2在激活函数" class="headerlink" title="1先归一化  2在激活函数"></a>1先归一化  2在激活函数</h3><p>归一化是加快训练速度</p>
+<p>就是得到想要的Z的过程</p>
+<p>普通神经网络得到的Z经过γ还有β的参数加入转换成$\hat{Z}$ 如下图</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230928113840176.png" alt="image-20230928113840176"></h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200411110936247.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zNjgxNTMxMw==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p> $\hat{Z^{[i]}}$代表的是某一层的第几个隐藏单元，若有表示第几次的隐藏单元可以这样写</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200411110945828.png" alt="img"></p>
+<p>$\hat{Z}$其实就是下一层的输入 如下</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=" "></a> </h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20230928111417196.png" alt="image-20230928111417196"></p>
+<h2 id="batch-norm-拟合神经网络"><a href="#batch-norm-拟合神经网络" class="headerlink" title="batch norm 拟合神经网络"></a>batch norm 拟合神经网络</h2><p>Batch归一化的关键步骤之一是在每个批次中计算特征的平均值，然后将这个平均值减去每个样本的对应特征值，以实现特征的归一化。这有助于确保每个批次中的特征在相似的尺度上，从而提高了深度神经网络的训练稳定性和速度。</p>
+<p>由于计算$\hat{Z}$由于需要   先计算特征的平均值，然后将这个平均值减去每个样本的对应特征值。也就是需要+b然后-b 计算之间的差值</p>
+<p>从而达到标准化的目的。所以我们可以不需要b的值（b值就是$b^{[i]}$）</p>
+<h4 id="batch-norm函数会使我们的优化函数变得更容易优化"><a href="#batch-norm函数会使我们的优化函数变得更容易优化" class="headerlink" title="batch norm函数会使我们的优化函数变得更容易优化"></a>batch norm函数会使我们的优化函数变得更容易优化</h4><p><strong>Batch</strong>归一化将你的数据以<strong>mini-batch</strong>的形式逐一处理，但在测试时，你可能需要对每个样本逐一处理，我们来看一下怎样调整你的网络来做到这一点。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200411150615508.png" alt="img"></p>
+<p>在训练时，这些就是用来执行Batch归一化的等式。在一个mini-batch中，你将mini-batch的 $z^{(i)}$ 值求和，计算均值，所以这里你只把一个mini-batch中的样本都加起来，我用 m mm 来表示这个mini-batch中的样本数量，而不是整个训练集。然后计算方差，再算 $ z^{(i)}<em>{norm}$ ，即用均值和标准差来调整，加上 $ \epsilon$ 是为了数值稳定性。 $ \tilde{z} $  是用 $\gamma$和 $ \beta$再次调整 $ z</em>{norm}$  得到的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20231002164153910.png" alt="image-20231002164153910"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200411150639424.png" alt="img"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="C:\Users\阿千\AppData\Roaming\Typora\typora-user-images\image-20231002164218036.png" alt="image-20231002164218036"></p>
+<h2 id="SOFTMAX回归"><a href="#SOFTMAX回归" class="headerlink" title="SOFTMAX回归"></a>SOFTMAX回归</h2><p>二分分类叫logic回归 那么多种分类叫做 softmax回归，意思就是分类的选项更多。<strong>就是分更多类</strong></p>
+<p>具体计算如下</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://img-blog.csdnimg.cn/20200411152940263.png" alt="img"></p>
+<p>通常就是神经网络计算到z后在用softmax激活函数得到$\hat z$ 然后在得到概率</p>
+<p>但是假如分两类就会回到logic回归上了</p>
+<h1 id="训练一个Softmax分类器"><a href="#训练一个Softmax分类器" class="headerlink" title="训练一个Softmax分类器"></a>训练一个Softmax分类器</h1><p>代码实践</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_36815313/article/details/105455056">3.9 训练一个 Softmax 分类器-深度学习第二课《改善深层神经网络》-Stanford吴恩达教授_trainable soft-max classifier-CSDN博客</a></p>
+<h2 id="深度学习框架tensorflow"><a href="#深度学习框架tensorflow" class="headerlink" title="深度学习框架tensorflow"></a>深度学习框架tensorflow</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">import numpy as np</span><br><span class="line">import h5py</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import tensorflow as tf</span><br><span class="line">from tensorflow.python.framework import ops</span><br><span class="line">from tf_utils import load_dataset, random_mini_batches, convert_to_one_hot, predict</span><br><span class="line">import tensorflow.compat.v1 as tf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line">np.random.seed(1)</span><br><span class="line">tf.disable_v2_behavior()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">coefficients = np.array([[1.],[-20.],[100.]])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">w = tf.Variable(0,dtype = tf.float32)</span><br><span class="line">x = tf.placeholder(tf.float32,[3,1])</span><br><span class="line"># cost = tf.add(tf.add(w**2,tf.multiply(-10.,w)),25)</span><br><span class="line">cost = x[0][0]*w**2 +x[1][0]*w + x[2][0]</span><br><span class="line">train =tf.train.GradientDescentOptimizer(0.01).minimize(cost)</span><br><span class="line"></span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">session = tf.Session()</span><br><span class="line">session.run(init)</span><br><span class="line"></span><br><span class="line">session.run(train,feed_dict=&#123;x:coefficients&#125;)</span><br><span class="line">print(session.run(w))</span><br><span class="line"></span><br><span class="line">for i in range(1000):</span><br><span class="line">    session.run(train,feed_dict=&#123;x:coefficients&#125;)</span><br><span class="line">    </span><br><span class="line">print(session.run(w))</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://piged-brother.github.io">猪头弟弟</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://piged-brother.github.io/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/">http://piged-brother.github.io/2023/10/11/吴恩达课程第二课/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://piged-brother.github.io" target="_blank">猪头弟弟</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/">吴恩达深度学习基础</a></div><div class="post_share"><div class="social-share" data-image="https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/" title="吴恩达深度学习课程第一课"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">吴恩达深度学习课程第一课</div></div></a></div><div class="next-post pull-right"><a href="/2023/05/16/%E5%82%BB%E9%80%BC%E5%8F%B6%E5%AD%90-1/" title="致叶子"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://pic.kts.g.mi.com/933ac389af7423e602592eecaa5d62077883583152532710569.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">致叶子</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Twikoo</span><span class="switch-btn"></span><span class="second-comment">Valine</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">猪头弟弟</div><div class="author-info__description">欲买桂花同载酒，终不似，少年游。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/piged-brother"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/wq2571931803" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=2571931803&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:2571931803@qq.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">just so so!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%96%B9%E5%B7%AE%E5%92%8C%E5%81%8F%E5%B7%AE%EF%BC%9F"><span class="toc-text">什么是方差和偏差？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="toc-text">如何解决？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%EF%BC%9A"><span class="toc-text">正则化：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AD%A3%E5%88%99%E5%8C%96%E5%8F%AF%E4%BB%A5%E5%87%8F%E5%B0%91%E8%BF%87%E5%BA%A6%E6%8B%9F%E5%90%88%EF%BC%9F"><span class="toc-text">为什么正则化可以减少过度拟合？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88L1%E4%BC%9A%E5%AF%BC%E8%87%B4%E6%9F%90%E4%BA%9Bw%E5%8F%82%E6%95%B0%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%B0%8F-%EF%BC%9F"><span class="toc-text">为什么L1会导致某些w参数越来越小 ？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dropout%E6%AD%A3%E5%88%99%E5%8C%96"><span class="toc-text">Dropout正则化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E6%96%BD%EF%BC%9F"><span class="toc-text">如何实施？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E9%A6%96%E5%85%88%E8%A6%81%E5%AE%9A%E4%B9%89%E5%90%91%E9%87%8F-d-%EF%BC%8C-d-3-%E8%A1%A8%E7%A4%BA%E4%B8%80%E4%B8%AA%E4%B8%89%E5%B1%82%E7%9A%84dropout%E5%90%91%E9%87%8F%EF%BC%9A"><span class="toc-text">1.首先要定义向量 d ， $d^{[3]}$  表示一个三层的dropout向量：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%B0%B1%E6%98%AF%E5%B0%86%E8%8E%B7%E5%8F%96%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BE%97%E5%88%B0%E7%9A%84d3%E7%9F%A9%E9%98%B5%E4%B9%98%E4%B8%80%E4%B8%8B-%E5%8E%BB%E6%8E%89%E6%9F%90%E4%BA%9B%E8%8A%82%E7%82%B9"><span class="toc-text">2接下来就是将获取的激活函数与得到的d3矩阵乘一下 去掉某些节点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E6%9C%80%E5%90%8E%E6%88%91%E4%BB%AC%E5%90%91%E5%A4%96%E6%89%A9%E5%B1%95-a-3-%E7%94%A8%E5%AE%83%E5%88%9D%E4%B8%800-8%EF%BC%8C%E6%88%96%E8%80%85%E8%AF%B4%E6%98%AF%E9%99%A4%E4%BB%A5keep-prob%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-text">3最后我们向外扩展$ a^{[3]}$,用它初一0.8，或者说是除以keep-prob的参数</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%AD%A3%E5%88%99%E5%8C%96%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">其他正则化方法：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E8%BE%93%E5%85%A5"><span class="toc-text">归一化输入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8"><span class="toc-text">梯度消失和梯度爆炸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">神经网络的权重初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E6%A3%80%E9%AA%8C1-13-%E6%A2%AF%E5%BA%A6%E6%A3%80%E9%AA%8C-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E8%AF%BE%E3%80%8A%E6%94%B9%E5%96%84%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E3%80%8B-Stanford%E5%90%B4%E6%81%A9%E8%BE%BE%E6%95%99%E6%8E%88-Zhao-Jichao%E7%9A%84%E5%8D%9A%E5%AE%A2-CSDN%E5%8D%9A%E5%AE%A2"><span class="toc-text">梯度检验1.13 梯度检验-深度学习第二课《改善深层神经网络》-Stanford吴恩达教授_Zhao-Jichao的博客-CSDN博客</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mini-batch-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="toc-text">mini-batch 梯度下降法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%8B%E5%89%8D%E6%88%91%E4%BB%AC%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%A5%9E%E5%B0%86%E7%BD%91%E7%BB%9C%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E5%8F%ABbatch%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="toc-text">之前我们学习的神将网络梯度下降叫batch下降法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#batch%E4%B8%8B%E9%99%8D%E6%B3%95%E5%92%8Cmini-batch%E4%B8%8B%E9%99%8D%E6%B3%95%E6%9C%89%E4%BB%80%E4%B9%88%E4%B8%8D%E4%B8%80%E6%A0%B7%E5%90%97%EF%BC%9F"><span class="toc-text">batch下降法和mini-batch下降法有什么不一样吗？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8C%87%E6%95%B0%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87"><span class="toc-text">指数加权平均</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87%E6%95%B0"><span class="toc-text">如何理解加权平均数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%8F%E5%B7%AE%E4%BF%AE%E6%AD%A3"><span class="toc-text">偏差修正</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E9%87%8F%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="toc-text">动量梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RMSprop"><span class="toc-text">RMSprop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adam%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95"><span class="toc-text">Adam优化算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F"><span class="toc-text">学习率衰减</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0%E7%9A%84%E8%B0%83%E8%AF%95"><span class="toc-text">超参数的调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0%E7%9A%84%E5%AE%9E%E8%B7%B5-PandasVS-caviar"><span class="toc-text">超参数的实践  PandasVS caviar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E7%BD%91%E7%BB%9C%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-text">正则化网络的激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E5%85%88%E5%BD%92%E4%B8%80%E5%8C%96-2%E5%9C%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-text">1先归一化  2在激活函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-2"><span class="toc-text"> </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#batch-norm-%E6%8B%9F%E5%90%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="toc-text">batch norm 拟合神经网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#batch-norm%E5%87%BD%E6%95%B0%E4%BC%9A%E4%BD%BF%E6%88%91%E4%BB%AC%E7%9A%84%E4%BC%98%E5%8C%96%E5%87%BD%E6%95%B0%E5%8F%98%E5%BE%97%E6%9B%B4%E5%AE%B9%E6%98%93%E4%BC%98%E5%8C%96"><span class="toc-text">batch norm函数会使我们的优化函数变得更容易优化</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SOFTMAX%E5%9B%9E%E5%BD%92"><span class="toc-text">SOFTMAX回归</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E4%B8%80%E4%B8%AASoftmax%E5%88%86%E7%B1%BB%E5%99%A8"><span class="toc-text">训练一个Softmax分类器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6tensorflow"><span class="toc-text">深度学习框架tensorflow</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/" title="吴恩达深度学习课程第一课"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://media.9game.cn/gamebase/ieu-gdc-pre-process/images/20220527/6/22/6e5a45ad05b0ddecbccc4c7bc46a52a1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="吴恩达深度学习课程第一课"/></a><div class="content"><a class="title" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%B8%80%E8%AF%BE/" title="吴恩达深度学习课程第一课">吴恩达深度学习课程第一课</a><time datetime="2023-10-11T12:39:33.000Z" title="发表于 2023-10-11 20:39:33">2023-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/" title="吴恩达深度学习课程第二课"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="吴恩达深度学习课程第二课"/></a><div class="content"><a class="title" href="/2023/10/11/%E5%90%B4%E6%81%A9%E8%BE%BE%E8%AF%BE%E7%A8%8B%E7%AC%AC%E4%BA%8C%E8%AF%BE/" title="吴恩达深度学习课程第二课">吴恩达深度学习课程第二课</a><time datetime="2023-10-11T12:21:00.000Z" title="发表于 2023-10-11 20:21:00">2023-10-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/05/16/%E5%82%BB%E9%80%BC%E5%8F%B6%E5%AD%90-1/" title="致叶子"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/loading.gif" data-original="https://pic.kts.g.mi.com/933ac389af7423e602592eecaa5d62077883583152532710569.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="致叶子"/></a><div class="content"><a class="title" href="/2023/05/16/%E5%82%BB%E9%80%BC%E5%8F%B6%E5%AD%90-1/" title="致叶子">致叶子</a><time datetime="2023-05-16T14:57:36.000Z" title="发表于 2023-05-16 22:57:36">2023-05-16</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://www.shenmegeng.cn/uploads/20220823/d5502acfbdec4b708e698e261043786f.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2023 By 猪头弟弟</div><div class="footer_custom_text">if i cant see you .. good mornin .. good evening .. and good night</div><div id="running-time"></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo-api-mu-wheat.vercel.app/',
+      region: 'ap-jiangxi',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo-api-mu-wheat.vercel.app/',
+      region: 'ap-jiangxi',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.textContent = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'Qi6WjJTanZWDtvQZo4Scf9IZ-gzGzoHsz',
+      appKey: 'K6UDwBqMjHayr9sWQPcZlxsh',
+      avatar: 'monsterid',
+      serverURLs: 'https://qi6wjjta.lc-cn-n1-shared.com',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: true
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Twikoo' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/weather.js"></script><script>setInterval(()=>{let create_time=Math.round(new Date("2020-3-21-20:14:00").getTime()/1000);let timestamp=Math.round((new Date().getTime()+8*60*60*1000)/1000);let second=timestamp-create_time;let time=new Array(0,0,0,0,0);if(second>=365*24*3600){time[0]=parseInt(second/(365*24*3600));second%=365*24*3600}if(second>=24*3600){time[1]=parseInt(second/(24*3600));second%=24*3600}if(second>=3600){time[2]=parseInt(second/3600);second%=3600}if(second>=60){time[3]=parseInt(second/60);second%=60}if(second>0){time[4]=second}currentTimeHtml='小破站已经安全运行 '+time[0]+' 年 '+time[1]+' 天 '+time[2]+' 时 '+time[3]+' 分 '+time[4]+' 秒';var elementById=document.getElementById('running-time');if(elementById){elementById.innerHTML=currentTimeHtml}},1000);</script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="true" data-text="w,d,n,m,d" data-fontsize="15px" data-random="false" async="async"></script><script>(function(d, w, c) {
+    w.ChatraID = 'oCi2xHdNfKnfMGvfh';
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://call.chatra.io/chatra.js';
+    if (d.head) d.head.appendChild(s);
+})(document, window, 'Chatra');
+
+if (true) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      Chatra('openChat')
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      Chatra('hide')
+    }
+    function chatBtnShow () {
+      Chatra('show')
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
